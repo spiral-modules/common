@@ -7,9 +7,10 @@
 
 namespace Spiral\Tests\Debug;
 
+use Mockery as m;
+use Psr\Log\LoggerInterface;
 use Spiral\Debug\Dumper;
 
-//No much need to validate output, just check that it's not dying
 class DumperTest extends \PHPUnit_Framework_TestCase
 {
     public function testDumpIntoBuffer()
@@ -149,5 +150,19 @@ class DumperTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('Closure', $dump);
         $this->assertContains('DumperTest.php', $dump);
+    }
+
+    public function testDumpToLog()
+    {
+        $logger = m::mock(LoggerInterface::class);
+        $dumper = new Dumper(10, null, $logger);
+
+        $logger->shouldReceive('debug')->with(
+            $dumper->dump('abc', Dumper::OUTPUT_RETURN)
+        );
+
+        $dumper = new Dumper(10, null, $logger);
+
+        $dumper->dump('abc', Dumper::OUTPUT_LOG);
     }
 }

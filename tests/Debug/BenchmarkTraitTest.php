@@ -11,6 +11,7 @@ namespace Spiral\Tests\Debug;
 use Interop\Container\ContainerInterface;
 use Mockery as m;
 use Spiral\Core\Component;
+use Spiral\Debug\Benchmarker;
 use Spiral\Debug\BenchmarkerInterface;
 use Spiral\Debug\Traits\BenchmarkTrait;
 use Spiral\Tests\Core\Fixtures\SharedComponent;
@@ -67,6 +68,16 @@ class BenchmarkTraitTest extends \PHPUnit_Framework_TestCase
         )->andReturn(0.02);
 
         $this->assertSame(0.02, $class->doAbc('test'));
+    }
+
+    /**
+     * @expectedException \Spiral\Debug\Exceptions\BenchmarkException
+     * @expectedExceptionMessage Unpaired benchmark record 'invalid'
+     */
+    public function testUnpaired()
+    {
+        $b = new Benchmarker();
+        $b->benchmark($this, [0 => 'invalid']);
     }
 }
 
