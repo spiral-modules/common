@@ -29,13 +29,19 @@ class AutowiringTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(SampleClass::class, $container->make(SampleClass::class, []));
     }
 
-    public function testFollowBindings()
+    public function testGet()
     {
         $container = new Container();
 
         $container->bind(SampleClass::class, ExtendedSample::class);
-
         $this->assertInstanceOf(ExtendedSample::class, $container->get(SampleClass::class));
+    }
+
+    public function testMake()
+    {
+        $container = new Container();
+
+        $container->bind(SampleClass::class, ExtendedSample::class);
         $this->assertInstanceOf(ExtendedSample::class, $container->make(SampleClass::class, []));
     }
 
