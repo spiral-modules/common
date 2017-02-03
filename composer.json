@@ -1,7 +1,7 @@
 {
-  "name": "spiral/components",
-  "type": "framework",
-  "description": "Spiral, Core Components",
+  "name": "spiral/common",
+  "type": "library",
+  "description": "Spiral, Common Core Components",
   "license": "MIT",
   "authors": [
     {
