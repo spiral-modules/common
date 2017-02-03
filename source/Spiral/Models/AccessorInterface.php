@@ -12,12 +12,12 @@ use Spiral\Models\Exceptions\AccessException;
 
 /**
  * Accessors used to mock access to model field, control value setting, serializing and etc.
+ *
+ * Internal agreement declares accessor constructor as:
+ * public function __construct($value, array $context = [])
  */
 interface AccessorInterface extends \JsonSerializable
 {
-    //By internal agreement accessors will receive value and accessor context (field, entity)
-    //public function __construct($value, array $context = []);
-
     /**
      * Change value of accessor, no keyword "set" used to keep compatibility with model magic
      * methods. Attention, method declaration MUST contain internal validation and filters, MUST NOT
