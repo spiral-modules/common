@@ -15,7 +15,7 @@ Spiral, Common Components
   - Security layer (NIST RBAC)
   - Reactor, code scaffolding
 
-# Running Tests
+# Tests
 To run tests execute following commands
 ```
 composer install
