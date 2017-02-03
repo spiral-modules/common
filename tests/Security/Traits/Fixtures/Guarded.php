@@ -4,6 +4,7 @@
  *
  * @author    Dmitry Mironov <dmitry.mironov@spiralscout.com>
  */
+
 namespace Spiral\Tests\Security\Traits\Fixtures;
 
 

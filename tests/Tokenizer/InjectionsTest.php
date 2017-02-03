@@ -4,6 +4,7 @@
  *
  * @author Wolfy-J
  */
+
 namespace Spiral\Tests\Tokenizer;
 
 use Spiral\Core\Container;

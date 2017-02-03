@@ -4,6 +4,7 @@
  *
  * @author Wolfy-J
  */
+
 namespace Spiral\Tests\Reactor;
 
 use Spiral\Reactor\ClassDeclaration;

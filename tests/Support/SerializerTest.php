@@ -4,6 +4,7 @@
  *
  * @author Wolfy-J
  */
+
 namespace Spiral\Tests\Support;
 
 use Spiral\Reactor\Body\Source;

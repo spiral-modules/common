@@ -5,7 +5,7 @@ Spiral, Common Components
 # Components Included
   - Core interfaces, Autowiring DI, declarative singletons and auto injections
   - Tokenizer, static code analysis
-  - Debug, Profiling and Dump components
+  - Debug and Dump
   - FileManager
   - Security layer (NIST RBAC)
   - Reactor, code scaffolding

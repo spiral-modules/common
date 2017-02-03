@@ -4,6 +4,7 @@
  *
  * @author Wolfy-J
  */
+
 namespace Spiral\Tests\Spiral\Core;
 
 use Spiral\Core\MemoryInterface;

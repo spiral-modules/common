@@ -13,8 +13,8 @@ use Mockery as m;
 use Spiral\Core\Container;
 use Spiral\Core\Exceptions\Container\AutowireException;
 use Spiral\Tests\Core\Fixtures\SampleClass;
-use Spiral\Tests\Core\Fixtures\SharedComponent;
 use Spiral\Tests\Core\Fixtures\SaturableComponent;
+use Spiral\Tests\Core\Fixtures\SharedComponent;
 
 class SaturateTest extends \PHPUnit_Framework_TestCase
 {

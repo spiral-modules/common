@@ -9,7 +9,6 @@
 namespace Spiral\tests\Cases\Models;
 
 use Spiral\Models\DataEntity;
-use Spiral\Models\DynamicEntity;
 
 //todo: improve test coverage
 class DataEntityTest extends \PHPUnit_Framework_TestCase

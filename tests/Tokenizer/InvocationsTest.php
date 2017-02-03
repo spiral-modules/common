@@ -4,6 +4,7 @@
  *
  * @author Wolfy-J
  */
+
 namespace Spiral\Tests\Tokenizer;
 
 use Spiral\Tokenizer\Configs\TokenizerConfig;
@@ -75,8 +76,8 @@ class InvocationsTest extends \PHPUnit_Framework_TestCase
         $invocation1 = $invocations[0];
         $invocation2 = $invocations[1];
 
-        $this->assertSame(18, $invocation1->getLine());
-        $this->assertSame(19, $invocation2->getLine());
+        $this->assertSame(19, $invocation1->getLine());
+        $this->assertSame(20, $invocation2->getLine());
     }
 
     public function testLevel()

@@ -4,6 +4,7 @@
  *
  * @author Wolfy-J
  */
+
 namespace Spiral\Tests\Debug;
 
 use Spiral\Debug\Benchmarker;

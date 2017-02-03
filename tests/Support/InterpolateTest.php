@@ -5,6 +5,7 @@
  *
  * @author Wolfy-J
  */
+
 namespace Spiral\Tests\Support;
 
 class InterpolateTest extends \PHPUnit_Framework_TestCase
