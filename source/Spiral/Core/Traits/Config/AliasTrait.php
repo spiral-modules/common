@@ -20,7 +20,7 @@ trait AliasTrait
      */
     public function resolveAlias($alias)
     {
-        while (is_string($alias) && isset($this->config['aliases'][$alias])) {
+        while (is_string($alias) && isset($this->config) && isset($this->config['aliases'][$alias])) {
             $alias = $this->config['aliases'][$alias];
         }
 
