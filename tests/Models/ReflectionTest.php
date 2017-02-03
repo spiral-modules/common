@@ -5,6 +5,7 @@
  * @license   MIT
  * @author    Anton Titov (Wolfy-J)
  */
+
 namespace Spiral\tests\Cases\Models;
 
 use Spiral\Models\Reflections\ReflectionEntity;
@@ -52,6 +53,39 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
             $schema->getSetters()
         );
     }
+
+    public function testSecured()
+    {
+        $schema = new ReflectionEntity(ExtendedModel::class);
+        $this->assertSame(
+            [
+                'name'
+            ],
+            $schema->getSecured()
+        );
+    }
+
+    public function testHidden()
+    {
+        $schema = new ReflectionEntity(ExtendedModel::class);
+        $this->assertSame(
+            [
+                'value'
+            ],
+            $schema->getHidden()
+        );
+    }
+
+    public function testDeclaredMethods()
+    {
+        $schema = new ReflectionEntity(ExtendedModel::class);
+        $this->assertEquals(
+            [
+                new \ReflectionMethod(ExtendedModel::class, 'methodB')
+            ],
+            $schema->declaredMethods()
+        );
+    }
 }
 
 class TestModel extends SchematicEntity
@@ -60,6 +94,15 @@ class TestModel extends SchematicEntity
 
     protected $setters = ['value' => 'intval'];
     protected $getters = ['value' => 'intval'];
+
+    protected $secured = '*';
+
+    protected $hidden = ['value'];
+
+    protected function methodA()
+    {
+
+    }
 }
 
 class ExtendedModel extends TestModel
@@ -69,4 +112,11 @@ class ExtendedModel extends TestModel
     protected $setters = ['name' => 'strval'];
 
     protected $getters = ['name' => 'strtoupper'];
+
+    protected $secured = ['name'];
+
+    protected function methodB()
+    {
+
+    }
 }
