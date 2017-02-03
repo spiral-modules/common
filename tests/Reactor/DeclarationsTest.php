@@ -88,6 +88,7 @@ class DeclarationsTest extends \PHPUnit_Framework_TestCase
         $declaration = new FileDeclaration('Spiral\\Custom_Namespace', 'This is test file');
         $declaration->addUse(ContainerInterface::class, 'Container');
 
+
         $this->assertSame('Spiral\\Custom_Namespace', $declaration->getNamespace());
 
         $declaration->addElement($this->testClassDeclaration());
@@ -125,7 +126,7 @@ class DeclarationsTest extends \PHPUnit_Framework_TestCase
                      return true;
                  }
              }'),
-            preg_replace('/\s+/', '', $declaration->render())
+            preg_replace('/\s+/', '', (string)$declaration)
         );
     }
 
