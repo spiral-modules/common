@@ -64,27 +64,10 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-interface DeclarationInterface
-{
-    /**
-     * Indent is always 4 spaces.
-     */
-    const INDENT = "    ";
-
-    /**
-     * Must render it's own content into string using given indent level.
-     *
-     * @param int $indentLevel
-     *
-     * @return string
-     */
-    public function render(int $indentLevel = 0): string;
-}
-
 /**
  * Generic element declaration.
  */
-abstract class Declaration extends Component implements DeclarationInterface
+abstract class Declaration extends Component implements Serializer\DeclarationInterface
 {
     /**
      * Access level constants.

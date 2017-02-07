@@ -8,8 +8,8 @@
 
 namespace Spiral\Support;
 
-use Spiral\Reactor\DeclarationInterface;
 use Spiral\Support\Exceptions\SerializeException;
+use Spiral\Support\Serializer\DeclarationInterface;
 
 /**
  * Provides very simple api for serializing values. Attention, this is helper class, it's not
