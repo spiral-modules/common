@@ -1,6 +1,10 @@
 CHANGELOG for 0.9.0 RC
 ======================
 
+0.9.3 (07.02.2017)
+-----
+* Removed dev dependency with Reactor
+
 0.9.2 (07.02.2017)
 -----
 * Models component split out
