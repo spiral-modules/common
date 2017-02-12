@@ -15,7 +15,8 @@ namespace Spiral\Core;
 interface MemoryInterface
 {
     /**
-     * Read data from long memory cache. Must return exacts same value as saved or null.
+     * Read data from long memory cache. Must return exacts same value as saved or null. Current
+     * convention allows to store serializable (var_export-able) data.
      *
      * @param string $section Non case sensitive.
      *
@@ -24,7 +25,8 @@ interface MemoryInterface
     public function loadData(string $section);
 
     /**
-     * Put data to long memory cache. No inner references or closures are allowed.
+     * Put data to long memory cache. No inner references or closures are allowed. Current
+     * convention allows to store serializable (var_export-able) data.
      *
      * @param string       $section Non case sensitive.
      * @param string|array $data
