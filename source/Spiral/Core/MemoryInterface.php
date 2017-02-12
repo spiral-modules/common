@@ -9,7 +9,8 @@
 namespace Spiral\Core;
 
 /**
- * Long memory cache. Something very fast on read and slow on write!
+ * Long memory cache. Use this storage to remember results of your calculations, do not store user
+ * or non-static data in here (!).
  */
 interface MemoryInterface
 {
