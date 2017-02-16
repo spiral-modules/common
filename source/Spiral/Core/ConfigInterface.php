@@ -11,7 +11,7 @@ namespace Spiral\Core;
 use Spiral\Core\Container\InjectableInterface;
 
 /**
- * Simple Spiral components config interface.
+ * @deprecated
  */
 interface ConfigInterface extends InjectableInterface, \ArrayAccess
 {
