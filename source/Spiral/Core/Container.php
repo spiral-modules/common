@@ -121,6 +121,10 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
             return $this->outerContainer->get($alias);
         }
 
+        if ($alias instanceof Autowire) {
+            return $alias->resolve($this);
+        }
+
         //Direct bypass to construct, i might think about this option... or not.
         return $this->make($alias, [], $context);
     }
