@@ -24,7 +24,7 @@ interface FactoryInterface
      * by user, rest of constructor parameters must be filled by container. Method might return
      * pre-constructed singleton!
      *
-     * @param string $class
+     * @param string $alias
      * @param array  $parameters Parameters to construct new class.
      *
      * @return mixed|null|object
@@ -32,5 +32,5 @@ interface FactoryInterface
      * @throws AutowireException
      * @throws ArgumentException
      */
-    public function make(string $class, $parameters = []);
+    public function make(string $alias, $parameters = []);
 }

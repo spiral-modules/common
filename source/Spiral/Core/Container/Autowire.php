@@ -40,6 +40,8 @@ final class Autowire
 
     /**
      * @param FactoryInterface $factory
+     * @param array            $parameters Context specific parameters (always prior to declared
+     *                                     ones).
      *
      * @return mixed
      *
@@ -47,9 +49,11 @@ final class Autowire
      *                                                         identifier.
      * @throws \Interop\Container\Exception\ContainerException Error while retrieving the entry.
      */
-    public function resolve(FactoryInterface $factory)
-    {
-        return $factory->make($this->alias, $this->parameters);
+    public function resolve(
+        FactoryInterface $factory,
+        array $parameters = []
+    ) {
+        return $factory->make($this->alias, $parameters + $this->parameters);
     }
 
     /**
