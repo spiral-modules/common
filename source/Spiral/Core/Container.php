@@ -130,14 +130,14 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
      *
      * @param string|null $context Related to parameter caused injection if any.
      */
-    final public function make(string $class, $parameters = [], string $context = null)
+    final public function make(string $alias, $parameters = [], string $context = null)
     {
-        if (!isset($this->bindings[$class])) {
+        if (!isset($this->bindings[$alias])) {
             //No direct instructions how to construct class, make is automatically
-            return $this->autowire($class, $parameters, $context);
+            return $this->autowire($alias, $parameters, $context);
         }
 
-        if (is_object($binding = $this->bindings[$class])) {
+        if (is_object($binding = $this->bindings[$alias])) {
             //When binding is instance, assuming singleton
             return $binding;
         }
@@ -147,43 +147,11 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
             return $this->make($binding, $parameters, $context);
         }
 
-        if (is_string($binding[0])) {
-            //Class name
-            $instance = $this->make($binding[0], $parameters, $context);
-        } elseif ($binding[0] instanceof \Closure) {
-            $reflection = new \ReflectionFunction($binding[0]);
-
-            //Invoking Closure with resolved arguments
-            $instance = $reflection->invokeArgs(
-                $this->resolveArguments($reflection, $parameters, $context)
-            );
-        } elseif (is_array($binding[0]) && isset($binding[0][1])) {
-            //In a form of resolver and method
-            list($resolver, $method) = $binding[0];
-
-            //Resolver instance (i.e. [ClassName::class, 'method'])
-            $resolver = $this->get($resolver);
-            $method = new \ReflectionMethod($resolver, $method);
-            $method->setAccessible(true);
-
-            //Invoking factory method with resolved arguments
-            $instance = $method->invokeArgs(
-                $resolver,
-                $this->resolveArguments($method, $parameters, $context)
-            );
-        } else {
-            //No idea what was this binding was
-            throw new ContainerException("Invalid binding for '{$class}'");
-        }
+        $instance = $this->evaluateBinding($alias, $binding[0], $parameters, $context);
 
         if ($binding[1]) {
-            //Declared singleton
-            $this->bindings[$class] = $instance;
-        }
-
-        if (!is_object($instance)) {
-            //Non object bindings are allowed
-            return $instance;
+            //Indicates singleton
+            $this->bindings[$alias] = $instance;
         }
 
         return $instance;
@@ -272,7 +240,7 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
      */
     final public function bind(string $alias, $resolver): Container
     {
-        if (is_array($resolver) || $resolver instanceof \Closure) {
+        if (is_array($resolver) || $resolver instanceof \Closure || $resolver instanceof Autowire) {
             //Array means = execute me, false = not singleton
             $this->bindings[$alias] = [$resolver, false];
 
@@ -295,7 +263,7 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
      */
     final public function bindSingleton(string $alias, $resolver): Container
     {
-        if (is_object($resolver) && !$resolver instanceof \Closure) {
+        if (is_object($resolver) && !$resolver instanceof \Closure && !$resolver instanceof Autowire) {
             //Direct binding to an instance
             $this->bindings[$alias] = $resolver;
 
@@ -453,6 +421,59 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
         //Your code can go here (for example LoggerAwareInterface, custom hydration and etc)
 
         return $instance;
+    }
+
+    /**
+     * @param string      $alias
+     * @param mixed       $target Value binded by user.
+     * @param array       $parameters
+     * @param string|null $context
+     *
+     * @return mixed|null|object
+     *
+     * @throws \Spiral\Core\Exceptions\Container\ContainerException
+     */
+    private function evaluateBinding(
+        string $alias,
+        $target,
+        array $parameters,
+        string $context = null
+    ) {
+        if (is_string($target)) {
+            //Reference
+            return $this->make($target, $parameters, $context);
+        }
+
+        if ($target instanceof Autowire) {
+            return $target->resolve($this, $parameters);
+        }
+
+        if ($target instanceof \Closure) {
+            $reflection = new \ReflectionFunction($target);
+
+            //Invoking Closure with resolved arguments
+            return $reflection->invokeArgs(
+                $this->resolveArguments($reflection, $parameters, $context)
+            );
+        }
+
+        if (is_array($target) && isset($target[1])) {
+            //In a form of resolver and method
+            list($resolver, $method) = $target;
+
+            //Resolver instance (i.e. [ClassName::class, 'method'])
+            $resolver = $this->get($resolver);
+            $method = new \ReflectionMethod($resolver, $method);
+            $method->setAccessible(true);
+
+            //Invoking factory method with resolved arguments
+            return $method->invokeArgs(
+                $resolver,
+                $this->resolveArguments($method, $parameters, $context)
+            );
+        }
+
+        throw new ContainerException("Invalid binding for '{$alias}'");
     }
 
     /**

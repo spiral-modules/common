@@ -332,4 +332,34 @@ class AutowiringTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($wire, $wireb);
     }
+
+    public function testBingToAutowire()
+    {
+        $container = new Container();
+        $container->bind('abc', new Container\Autowire(SoftDependedClass::class, [
+            'name' => 'Fixed'
+        ]));
+
+        /**
+         * @var SoftDependedClass $abc
+         */
+        $abc = $container->get('abc');
+
+        $this->assertSame('Fixed', $abc->getName());
+    }
+
+    public function testBingToAutowireWithParameters()
+    {
+        $container = new Container();
+        $container->bind('abc', new Container\Autowire(SoftDependedClass::class, [
+            'name' => 'Fixed'
+        ]));
+
+        /**
+         * @var SoftDependedClass $abc
+         */
+        $abc = $container->make('abc', ['name' => 'Overwritten']);
+
+        $this->assertSame('Overwritten', $abc->getName());
+    }
 }
