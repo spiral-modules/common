@@ -1,6 +1,10 @@
 CHANGELOG for 0.9.0 RC
 ======================
 
+1.0.0 (05.04.2017)
+-----
+- public release
+
 0.9.4 (01.04.2017)
 -----
 - support for partial bindings in container
