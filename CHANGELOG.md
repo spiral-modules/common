@@ -1,6 +1,10 @@
 CHANGELOG for 0.9.0 RC
 ======================
 
+1.0.2 (17.07.2017)
+-----
+- fixed check of optional parameters which are specified before non-optional parameters (do not do that)
+
 1.0.0 (05.04.2017)
 -----
 - public release
