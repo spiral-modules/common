@@ -13,6 +13,8 @@ use Spiral\Debug\BenchmarkerInterface;
 
 /**
  * Provides access to benchmark function.
+ *
+ * @deprecated this implementation and future usages must be deprecated.
  */
 trait BenchmarkTrait
 {

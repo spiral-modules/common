@@ -8,7 +8,7 @@
 
 namespace Spiral\Core;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * Basic spiral cell. Automatically detects if "container" property are presented in class or uses
@@ -31,7 +31,7 @@ abstract class Component
      *
      * @return ContainerInterface|null
      */
-    protected function iocContainer()
+    protected function iocContainer(): ?ContainerInterface
     {
         if (
             property_exists($this, 'container')
@@ -41,26 +41,19 @@ abstract class Component
             return $this->container;
         }
 
-        /*
-         * Technically your code can work without ever being using fallback container, all
-         * spiral components can do that and only few traits will require few extra parameters.
-         *
-         * I'm planning one day (update: DONE) to run spiral as worker and later in async mode (few app
-         * processes in memory), memory schemas might help a lot by minimizing runtime code by using
-         * pre-calculated behaviours.
-         */
-
         return self::$staticContainer;
     }
 
     /**
      * Global container scope access.
      *
-     * @param ContainerInterface $container Can be set to null.
+     * @param ContainerInterface $scope Container to be used to set/replace existed scope.
      *
      * @return ContainerInterface|null
      */
-    final public static function staticContainer(ContainerInterface $container = null)
+    final public static function staticContainer(
+        ContainerInterface $scope = null
+    ): ?ContainerInterface
     {
         if (func_num_args() === 0) {
             return self::$staticContainer;
@@ -68,7 +61,7 @@ abstract class Component
 
         //Exchanging values
         $outer = self::$staticContainer;
-        self::$staticContainer = $container;
+        self::$staticContainer = $scope;
 
         //Return previous container or null
         return $outer;

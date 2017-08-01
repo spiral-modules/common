@@ -8,7 +8,7 @@
 
 namespace Spiral\Core\Traits;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Spiral\Core\Component;
 
 trait ComponentTrait
@@ -19,7 +19,7 @@ trait ComponentTrait
      *
      * @return ContainerInterface|null
      */
-    public function iocContainer()
+    public function iocContainer(): ?ContainerInterface
     {
         return Component::staticContainer();
     }

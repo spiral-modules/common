@@ -8,8 +8,8 @@
 
 namespace Spiral\Core\Traits;
 
-use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
+use Psr\Container\ContainerInterface;
 use Spiral\Core\Exceptions\ScopeException;
 
 /**
@@ -32,7 +32,7 @@ trait SaturateTrait
      *
      * @throws ScopeException
      */
-    private function saturate($default, $class)
+    private function saturate($default, string $class)
     {
         if (!empty($default)) {
             return $default;
@@ -57,5 +57,5 @@ trait SaturateTrait
      *
      * @return ContainerInterface
      */
-    abstract protected function iocContainer();
+    abstract protected function iocContainer(): ?ContainerInterface;
 }

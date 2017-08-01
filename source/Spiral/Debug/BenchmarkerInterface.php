@@ -10,6 +10,8 @@ namespace Spiral\Debug;
 
 /**
  * Interface responsible for benchmarking.
+ *
+ * @deprecated this implementation and future usages must be deprecated.
  */
 interface BenchmarkerInterface
 {

@@ -8,7 +8,7 @@
 
 namespace Spiral\Core;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use ReflectionFunctionAbstract as ContextFunction;
 use Spiral\Core\Container\Autowire;
 use Spiral\Core\Container\InjectableInterface;

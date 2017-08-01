@@ -11,7 +11,7 @@ namespace Spiral\Debug;
 use Psr\Log\LoggerInterface;
 
 /**
- * Has to provide configured instance of log.
+ * Context specific log factory.
  */
 interface LogsInterface
 {

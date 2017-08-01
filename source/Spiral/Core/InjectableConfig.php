@@ -19,9 +19,6 @@ use Spiral\Core\Exceptions\ConfigException;
  */
 class InjectableConfig extends Component implements ConfigInterface, \IteratorAggregate
 {
-    /**
-     * Spiral provides ability to automatically inject configs using configurator.
-     */
     const INJECTOR = ConfiguratorInterface::class;
 
     /**

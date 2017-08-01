@@ -82,15 +82,16 @@ class Dumper implements SingletonInterface, LoggerAwareInterface
      *
      * @return string
      */
-    public function dump($value, int $output = self::OUTPUT_ECHO): string
+    public function dump($value, int $output = self::OUTPUT_ECHO): ?string
     {
         switch ($output) {
             case self::OUTPUT_ECHO:
                 if (php_sapi_name() == 'cli') {
                     print_r($value);
+                } else {
+                    echo $this->style->wrapContainer($this->dumpValue($value, '', 0));
                 }
 
-                echo $this->style->wrapContainer($this->dumpValue($value, '', 0));
                 break;
 
             case self::OUTPUT_LOG:
@@ -103,8 +104,7 @@ class Dumper implements SingletonInterface, LoggerAwareInterface
                 return $this->style->wrapContainer($this->dumpValue($value, '', 0));
         }
 
-        //Nothing to return
-        return '';
+        return null;
     }
 
     /**
