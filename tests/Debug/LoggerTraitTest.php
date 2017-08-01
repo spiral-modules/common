@@ -69,7 +69,7 @@ class LoggedClass extends Component
         return $this->logger();
     }
 
-    public function getContainer()
+    public function getContainer(): ?\Psr\Container\ContainerInterface
     {
         return $this->iocContainer();
     }

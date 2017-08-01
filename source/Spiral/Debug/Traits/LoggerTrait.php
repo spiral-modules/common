@@ -8,7 +8,7 @@
 
 namespace Spiral\Debug\Traits;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Spiral\Debug\LogsInterface;
@@ -66,7 +66,7 @@ trait LoggerTrait
     /**
      * @return ContainerInterface
      */
-    abstract protected function iocContainer();
+    abstract protected function iocContainer(): ?ContainerInterface;
 
     /**
      * Create new instance of associated logger (on demand creation).
