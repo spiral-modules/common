@@ -50,7 +50,7 @@ trait LoggerTrait
         }
 
         //We are using class name as log channel (name) by default
-        return $this->logger = $this->createLogger();
+        return $this->logger = $this->makeLogger();
     }
 
     /**
@@ -73,7 +73,7 @@ trait LoggerTrait
      *
      * @return LoggerInterface
      */
-    private function createLogger(): LoggerInterface
+    private function makeLogger(): LoggerInterface
     {
         $container = $this->iocContainer();
         if (empty($container) || !$container->has(LogsInterface::class)) {
