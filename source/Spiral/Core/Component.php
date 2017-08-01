@@ -26,7 +26,8 @@ abstract class Component
     private static $staticContainer = null;
 
     /**
-     * Get instance of container associated with given object or container available in global scope.
+     * Get instance of container associated with given object or container available in global
+     * scope.
      *
      * @return ContainerInterface|null
      */

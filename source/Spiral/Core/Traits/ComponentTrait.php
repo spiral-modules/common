@@ -14,7 +14,8 @@ use Spiral\Core\Component;
 trait ComponentTrait
 {
     /**
-     * Get instance of container associated with given object or container available in global scope.
+     * Get instance of container associated with given object or container available in global
+     * scope.
      *
      * @return ContainerInterface|null
      */

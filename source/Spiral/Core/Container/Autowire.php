@@ -47,7 +47,8 @@ final class Autowire
      *
      * @throws \Spiral\Core\Exceptions\Container\AutowireException  No entry was found for this
      *                                                              identifier.
-     * @throws \Interop\Container\Exception\ContainerException      Error while retrieving the entry.
+     * @throws \Interop\Container\Exception\ContainerException      Error while retrieving the
+     *                                                              entry.
      */
     public function resolve(FactoryInterface $factory, array $parameters = [])
     {

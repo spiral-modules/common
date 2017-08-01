@@ -565,9 +565,9 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
     ) {
         if (is_null($value)) {
             if (
-            	!$parameter->isOptional()
-				&& !($parameter->isDefaultValueAvailable() && $parameter->getDefaultValue() === null)
-			) {
+                !$parameter->isOptional()
+                && !($parameter->isDefaultValueAvailable() && $parameter->getDefaultValue() === null)
+            ) {
                 throw new ArgumentException($parameter, $context);
             }
 

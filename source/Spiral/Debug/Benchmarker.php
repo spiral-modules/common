@@ -16,6 +16,7 @@ use Spiral\Debug\Exceptions\BenchmarkException;
  * Generic benchmarker.
  *
  * @todo improve implementation by returning Benchmark?
+ * @todo possibly deprecated
  */
 class Benchmarker extends Component implements BenchmarkerInterface, SingletonInterface
 {
