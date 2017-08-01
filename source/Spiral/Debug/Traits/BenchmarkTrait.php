@@ -8,7 +8,7 @@
 
 namespace Spiral\Debug\Traits;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Spiral\Debug\BenchmarkerInterface;
 
 /**
@@ -64,5 +64,5 @@ trait BenchmarkTrait
     /**
      * @return ContainerInterface
      */
-    abstract protected function iocContainer();
+    abstract protected function iocContainer(): ?ContainerInterface;
 }
