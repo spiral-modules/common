@@ -8,7 +8,6 @@
 
 namespace Spiral\Files;
 
-use Spiral\Core\Component;
 use Spiral\Core\Container\SingletonInterface;
 use Spiral\Files\Exceptions\FileNotFoundException;
 use Spiral\Files\Exceptions\FilesException;
@@ -19,7 +18,7 @@ use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 /**
  * Default abstraction for file management operations.
  */
-class FileManager extends Component implements SingletonInterface, FilesInterface
+class FileManager implements SingletonInterface, FilesInterface
 {
     /**
      * Default file mode for this manager.

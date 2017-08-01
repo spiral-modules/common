@@ -46,13 +46,11 @@ final class Autowire
      * @return mixed
      *
      * @throws \Spiral\Core\Exceptions\Container\AutowireException  No entry was found for this
-     *                                                         identifier.
-     * @throws \Interop\Container\Exception\ContainerException Error while retrieving the entry.
+     *                                                              identifier.
+     * @throws \Interop\Container\Exception\ContainerException      Error while retrieving the entry.
      */
-    public function resolve(
-        FactoryInterface $factory,
-        array $parameters = []
-    ) {
+    public function resolve(FactoryInterface $factory, array $parameters = [])
+    {
         return $factory->make($this->alias, $parameters + $this->parameters);
     }
 

@@ -11,16 +11,13 @@ namespace Spiral\Debug;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
-use Spiral\Core\Component;
 use Spiral\Core\Container\SingletonInterface;
 use Spiral\Debug\Dumper\Style;
 
 /**
  * One of the oldest spiral parts, used to dump variables content in user friendly way.
- *
- * @todo need cli style
  */
-class Dumper extends Component implements SingletonInterface, LoggerAwareInterface
+class Dumper implements SingletonInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
@@ -89,6 +86,10 @@ class Dumper extends Component implements SingletonInterface, LoggerAwareInterfa
     {
         switch ($output) {
             case self::OUTPUT_ECHO:
+                if (php_sapi_name() == 'cli') {
+                    print_r($value);
+                }
+
                 echo $this->style->wrapContainer($this->dumpValue($value, '', 0));
                 break;
 

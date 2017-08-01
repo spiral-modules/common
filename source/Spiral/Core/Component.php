@@ -26,8 +26,7 @@ abstract class Component
     private static $staticContainer = null;
 
     /**
-     * Get instance of container associated with given object, uses global container as fallback
-     * if not. Method generally used by traits.
+     * Get instance of container associated with given object or container available in global scope.
      *
      * @return ContainerInterface|null
      */
@@ -54,17 +53,13 @@ abstract class Component
     }
 
     /**
-     * Get/set instance of global/static container, due this method must be used as few times as
-     * possible both getter and setter methods joined into one. Please use this method only as
-     * fallback.
-     *
-     * @internal Do not use for business logic.
+     * Global container scope access.
      *
      * @param ContainerInterface $container Can be set to null.
      *
      * @return ContainerInterface|null
      */
-    final protected static function staticContainer(ContainerInterface $container = null)
+    final public static function staticContainer(ContainerInterface $container = null)
     {
         if (func_num_args() === 0) {
             return self::$staticContainer;
