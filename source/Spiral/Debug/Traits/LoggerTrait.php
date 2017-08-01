@@ -49,13 +49,13 @@ trait LoggerTrait
             return $this->logger;
         }
 
-        //We are using class name as log channel (name) by default
-        return $this->logger = $this->makeLogger();
+        return $this->logger = $this->makeLogger(static::class);
     }
 
     /**
      * Alias for "getLogger" function.
      *
+     * @deprecated Use getLogger() instead.
      * @return LoggerInterface
      */
     protected function logger(): LoggerInterface
@@ -69,18 +69,17 @@ trait LoggerTrait
     abstract protected function iocContainer(): ?ContainerInterface;
 
     /**
-     * Create new instance of associated logger (on demand creation).
+     * @param string $channel
      *
      * @return LoggerInterface
      */
-    private function makeLogger(): LoggerInterface
+    private function makeLogger(string $channel): LoggerInterface
     {
         $container = $this->iocContainer();
         if (empty($container) || !$container->has(LogsInterface::class)) {
             return new NullLogger();
         }
 
-        //We are using class name as log channel (name) by default
-        return $container->get(LogsInterface::class)->getLogger(static::class);
+        return $container->get(LogsInterface::class)->getLogger($channel);
     }
 }
