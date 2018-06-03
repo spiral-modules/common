@@ -1,6 +1,10 @@
 CHANGELOG for 0.9.0 RC
 ======================
 
+1.0.3 (03.06.2018)
+-----
+- container is no longer wraps ParseErrors
+
 1.0.2 (17.07.2017)
 -----
 - fixed check of optional parameters which are specified before non-optional parameters (do not do that)
