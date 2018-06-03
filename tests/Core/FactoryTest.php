@@ -95,7 +95,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Spiral\Core\Exceptions\Container\ContainerException
+     * @expectedException \ParseError
      */
     public function testConstructCorrupted()
     {

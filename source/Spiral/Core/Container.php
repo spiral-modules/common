@@ -383,16 +383,12 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
      * @return object
      *
      * @throws AutowireException
+     * @throws \ErrorException
      */
     final protected function autowire(string $class, array $parameters, string $context = null)
     {
-        try {
-            if (!class_exists($class)) {
-                throw new NotFoundException("Undefined class or binding '{$class}'");
-            }
-        } catch (\Error $e) {
-            //Issues with syntax or class definition
-            throw new ContainerException($e->getMessage(), $e->getCode(), $e);
+        if (!class_exists($class)) {
+            throw new NotFoundException("Undefined class or binding '{$class}'");
         }
 
         //Automatically create instance
@@ -435,7 +431,8 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
      *
      * @return mixed|null|object
      *
-     * @throws \Spiral\Core\Exceptions\Container\ContainerException
+     * @throws ContainerException
+     * @throws \Interop\Container\Exception\ContainerException
      */
     private function evaluateBinding(
         string $alias,
@@ -490,6 +487,7 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
      * @return object
      *
      * @throws ContainerException
+     * @throws \ErrorException
      */
     private function createInstance(string $class, array $parameters, string $context = null)
     {
@@ -565,9 +563,9 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
     ) {
         if (is_null($value)) {
             if (
-            	!$parameter->isOptional()
-				&& !($parameter->isDefaultValueAvailable() && $parameter->getDefaultValue() === null)
-			) {
+                !$parameter->isOptional()
+                && !($parameter->isDefaultValueAvailable() && $parameter->getDefaultValue() === null)
+            ) {
                 throw new ArgumentException($parameter, $context);
             }
 
