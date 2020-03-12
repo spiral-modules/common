@@ -573,16 +573,17 @@ class Container extends Component implements ContainerInterface, FactoryInterfac
         }
 
         $type = $parameter->getType();
+        $typeName = method_exists($type, 'getName') ? $type->getName() : (string)$type;
 
-        if ($type == 'array' && !is_array($value)) {
+        if ($typeName == 'array' && !is_array($value)) {
             throw new ArgumentException($parameter, $context);
         }
 
-        if (($type == 'int' || $type == 'float') && !is_numeric($value)) {
+        if (($typeName == 'int' || $typeName == 'float') && !is_numeric($value)) {
             throw new ArgumentException($parameter, $context);
         }
 
-        if ($type == 'bool' && !is_bool($value) && !is_numeric($value)) {
+        if ($typeName == 'bool' && !is_bool($value) && !is_numeric($value)) {
             throw new ArgumentException($parameter, $context);
         }
     }
